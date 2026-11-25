@@ -58,9 +58,9 @@ export const SkillGapChart: React.FC<SkillGapChartProps> = ({ evaluation }) => {
   };
 
   const barData = [
-    { name: "Matched", count: skillGap.matched_skills.length, color: "#10b981" },
-    { name: "Missing Req", count: skillGap.missing_required_skills.length, color: "#ef4444" },
-    { name: "Missing Pref", count: skillGap.missing_preferred_skills.length, color: "#f59e0b" },
+    { name: "Matched", count: skillGap.matched_skills.length, color: "#67A9CF" },
+    { name: "Missing Req", count: skillGap.missing_required_skills.length, color: "#EF8A62" },
+    { name: "Missing Pref", count: skillGap.missing_preferred_skills.length, color: "#f6b89f" },
   ];
 
   return (
@@ -71,22 +71,23 @@ export const SkillGapChart: React.FC<SkillGapChartProps> = ({ evaluation }) => {
         <div className="h-44 w-full">
           <ResponsiveContainer width="100%" height="100%">
             <RadarChart cx="50%" cy="50%" outerRadius="70%" data={radarData}>
-              <PolarGrid stroke="#334155" />
-              <PolarAngleAxis dataKey="subject" tick={{ fill: "#94a3b8", fontSize: 11 }} />
-              <PolarRadiusAxis angle={30} domain={[0, 100]} tick={{ fill: "#64748b", fontSize: 9 }} />
+              <PolarGrid stroke="#1b2943" />
+              <PolarAngleAxis dataKey="subject" tick={{ fill: "#F7F7F7", fontSize: 11 }} />
+              <PolarRadiusAxis angle={30} domain={[0, 100]} tick={{ fill: "#67A9CF", fontSize: 9 }} />
               <Radar
                 name="Score"
                 dataKey="score"
-                stroke="#6366f1"
-                fill="#6366f1"
+                stroke="#EF8A62"
+                fill="#EF8A62"
                 fillOpacity={0.45}
               />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: "#0f172a",
-                  borderColor: "#334155",
+                  backgroundColor: "#0e1726",
+                  borderColor: "#1b2943",
                   fontSize: "11px",
                   borderRadius: "8px",
+                  color: "#F7F7F7",
                 }}
               />
             </RadarChart>
@@ -99,7 +100,7 @@ export const SkillGapChart: React.FC<SkillGapChartProps> = ({ evaluation }) => {
         <div>
           <div className="flex justify-between items-center mb-1">
             <span className="text-xs font-semibold text-slate-300">Skill Alignment Ratio</span>
-            <span className="text-xs font-bold text-indigo-400">{skillGap.coverage_pct}% Coverage</span>
+            <span className="text-xs font-bold text-cerulean-400">{skillGap.coverage_pct}% Coverage</span>
           </div>
           <p className="text-[11px] text-slate-400">
             Categorization of candidate taxonomy matches against target JD requirements.
@@ -115,14 +116,15 @@ export const SkillGapChart: React.FC<SkillGapChartProps> = ({ evaluation }) => {
                 dataKey="name"
                 axisLine={false}
                 tickLine={false}
-                tick={{ fill: "#cbd5e1", fontSize: 11 }}
+                tick={{ fill: "#F7F7F7", fontSize: 11 }}
               />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: "#0f172a",
-                  borderColor: "#334155",
+                  backgroundColor: "#0e1726",
+                  borderColor: "#1b2943",
                   fontSize: "11px",
                   borderRadius: "8px",
+                  color: "#F7F7F7",
                 }}
               />
               <Bar dataKey="count" radius={[0, 6, 6, 0]}>
@@ -139,7 +141,7 @@ export const SkillGapChart: React.FC<SkillGapChartProps> = ({ evaluation }) => {
           {skillGap.matched_skills.slice(0, 4).map((s, idx) => (
             <span
               key={idx}
-              className="text-[10px] px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60"
+              className="text-[10px] px-2 py-0.5 rounded bg-cerulean-950/60 text-cerulean-300 border border-cerulean-800/60"
             >
               ✓ {s}
             </span>
@@ -147,7 +149,7 @@ export const SkillGapChart: React.FC<SkillGapChartProps> = ({ evaluation }) => {
           {skillGap.missing_required_skills.slice(0, 2).map((s, idx) => (
             <span
               key={idx}
-              className="text-[10px] px-2 py-0.5 rounded bg-rose-950/60 text-rose-300 border border-rose-800/60"
+              className="text-[10px] px-2 py-0.5 rounded bg-coral-950/60 text-coral-300 border border-coral-800/60"
             >
               ✕ {s}
             </span>

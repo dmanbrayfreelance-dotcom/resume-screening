@@ -79,28 +79,28 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({ currentJob, onEvaluati
   return (
     <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-6 shadow-sm">
       <div>
-        <h3 className="font-semibold text-slate-100 text-base">Multimodal Candidate Ingestion</h3>
+        <h3 className="font-semibold text-offwhite text-base">Multimodal Candidate Ingestion</h3>
         <p className="text-xs text-slate-400 mt-1">
           Upload candidate resume CV and optional video interview recording for automated end-to-end evaluation against{" "}
-          <span className="text-indigo-400 font-medium">{currentJob?.title || "selected role"}</span>.
+          <span className="text-coral-400 font-medium">{currentJob?.title || "selected role"}</span>.
         </p>
       </div>
 
       {errorMsg && (
-        <div className="flex items-center space-x-2 bg-rose-950/60 border border-rose-800/80 text-rose-300 text-xs px-4 py-3 rounded-xl">
+        <div className="flex items-center space-x-2 bg-coral-950/60 border border-coral-800/80 text-coral-300 text-xs px-4 py-3 rounded-xl">
           <AlertCircle className="w-4 h-4 shrink-0" />
           <span>{errorMsg}</span>
         </div>
       )}
 
       {successData && (
-        <div className="bg-emerald-950/60 border border-emerald-800/80 text-emerald-300 text-xs p-4 rounded-xl space-y-2">
+        <div className="bg-cerulean-950/60 border border-cerulean-800/80 text-cerulean-300 text-xs p-4 rounded-xl space-y-2">
           <div className="flex items-center space-x-2 font-semibold">
             <CheckCircle2 className="w-4 h-4" />
             <span>Evaluation Completed for {successData.candidate_name}!</span>
           </div>
-          <p className="text-emerald-400/90">
-            Overall Fit Score: <strong className="text-emerald-200">{successData.overall_fit_score}%</strong> (
+          <p className="text-cerulean-300/90">
+            Overall Fit Score: <strong className="text-offwhite">{successData.overall_fit_score}%</strong> (
             {successData.recommendation}). Candidate has been added to the active leaderboard.
           </p>
         </div>
@@ -114,7 +114,7 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({ currentJob, onEvaluati
             onClick={() => resumeInputRef.current?.click()}
             className={`border-2 border-dashed rounded-xl p-5 text-center cursor-pointer transition ${
               resumeFile
-                ? "border-indigo-500 bg-indigo-950/20"
+                ? "border-coral-500 bg-coral-950/20"
                 : "border-slate-800 hover:border-slate-700 bg-slate-950/50"
             }`}
           >
@@ -127,7 +127,7 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({ currentJob, onEvaluati
                 if (e.target.files?.[0]) setResumeFile(e.target.files[0]);
               }}
             />
-            <FileText className="w-8 h-8 mx-auto text-indigo-400 mb-2" />
+            <FileText className="w-8 h-8 mx-auto text-coral-400 mb-2" />
             <div className="text-xs font-semibold text-slate-200">
               {resumeFile ? resumeFile.name : "Upload Resume (Required)"}
             </div>
@@ -141,7 +141,7 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({ currentJob, onEvaluati
             onClick={() => videoInputRef.current?.click()}
             className={`border-2 border-dashed rounded-xl p-5 text-center cursor-pointer transition ${
               videoFile
-                ? "border-purple-500 bg-purple-950/20"
+                ? "border-cerulean-500 bg-cerulean-950/20"
                 : "border-slate-800 hover:border-slate-700 bg-slate-950/50"
             }`}
           >
@@ -154,7 +154,7 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({ currentJob, onEvaluati
                 if (e.target.files?.[0]) setVideoFile(e.target.files[0]);
               }}
             />
-            <Video className="w-8 h-8 mx-auto text-purple-400 mb-2" />
+            <Video className="w-8 h-8 mx-auto text-cerulean-400 mb-2" />
             <div className="text-xs font-semibold text-slate-200">
               {videoFile ? videoFile.name : "Upload Video Interview (Optional)"}
             </div>
@@ -173,7 +173,7 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({ currentJob, onEvaluati
               placeholder="e.g. Sarah Chen"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-slate-100 focus:outline-none focus:border-indigo-500"
+              className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-offwhite focus:outline-none focus:border-coral-500"
             />
           </div>
           <div>
@@ -183,7 +183,7 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({ currentJob, onEvaluati
               placeholder="sarah@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-slate-100 focus:outline-none focus:border-indigo-500"
+              className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-offwhite focus:outline-none focus:border-coral-500"
             />
           </div>
           <div>
@@ -193,7 +193,7 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({ currentJob, onEvaluati
               placeholder="+1-555-0192"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-slate-100 focus:outline-none focus:border-indigo-500"
+              className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-offwhite focus:outline-none focus:border-coral-500"
             />
           </div>
           <div>
@@ -203,7 +203,7 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({ currentJob, onEvaluati
               placeholder="San Francisco, CA"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-slate-100 focus:outline-none focus:border-indigo-500"
+              className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-offwhite focus:outline-none focus:border-coral-500"
             />
           </div>
         </div>
@@ -211,15 +211,15 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({ currentJob, onEvaluati
         {/* Upload Progress Bar */}
         {uploading && (
           <div className="bg-slate-950 border border-slate-800 p-4 rounded-xl space-y-2">
-            <div className="flex items-center justify-between text-xs text-indigo-300">
+            <div className="flex items-center justify-between text-xs text-coral-300">
               <span className="flex items-center space-x-2">
-                <Loader2 className="w-4 h-4 animate-spin text-indigo-400" />
+                <Loader2 className="w-4 h-4 animate-spin text-coral-400" />
                 <span>Processing Multimodal Pipeline...</span>
               </span>
               <span className="text-[11px] text-slate-400">{progressStage}</span>
             </div>
             <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
-              <div className="bg-gradient-to-r from-indigo-500 to-pink-500 h-full w-3/4 animate-pulse rounded-full" />
+              <div className="bg-gradient-to-r from-coral-500 via-coral-400 to-cerulean-500 h-full w-3/4 animate-pulse rounded-full" />
             </div>
           </div>
         )}
@@ -228,7 +228,7 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({ currentJob, onEvaluati
           <button
             type="submit"
             disabled={uploading || !resumeFile}
-            className="flex items-center space-x-2 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white font-semibold text-xs px-6 py-3 rounded-xl shadow-lg shadow-indigo-600/20 transition"
+            className="flex items-center space-x-2 bg-coral-500 hover:bg-coral-600 disabled:opacity-50 text-white font-semibold text-xs px-6 py-3 rounded-xl shadow-lg shadow-coral-500/25 transition"
           >
             <UploadCloud className="w-4 h-4" />
             <span>{uploading ? "Evaluating..." : "Run Screening Evaluation"}</span>

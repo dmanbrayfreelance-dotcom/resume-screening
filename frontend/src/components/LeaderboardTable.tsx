@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { LeaderboardItem, Candidate } from "../api/client";
-import { Search, ChevronDown, CheckCircle, AlertTriangle, UserCheck, ShieldAlert, FileText, ArrowUpDown } from "lucide-react";
+import { LeaderboardItem } from "../api/client";
+import { Search, AlertTriangle, CheckCircle } from "lucide-react";
 
 interface LeaderboardTableProps {
   items: LeaderboardItem[];
@@ -34,9 +34,9 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ items, onSel
   const getBadgeStyle = (rec: string) => {
     switch (rec.toLowerCase()) {
       case "strong hire":
-        return "bg-emerald-950/70 text-emerald-300 border-emerald-800/80";
+        return "bg-coral-950/80 text-coral-300 border-coral-800/80";
       case "hire":
-        return "bg-indigo-950/70 text-indigo-300 border-indigo-800/80";
+        return "bg-cerulean-950/80 text-cerulean-300 border-cerulean-800/80";
       case "further review":
         return "bg-amber-950/70 text-amber-300 border-amber-800/80";
       default:
@@ -45,9 +45,9 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ items, onSel
   };
 
   const getRankBadge = (rank: number) => {
-    if (rank === 1) return "bg-amber-500/20 text-amber-300 border-amber-500/40";
-    if (rank === 2) return "bg-slate-300/20 text-slate-200 border-slate-300/40";
-    if (rank === 3) return "bg-amber-700/20 text-amber-600 border-amber-700/40";
+    if (rank === 1) return "bg-coral-500/20 text-coral-300 border-coral-500/40";
+    if (rank === 2) return "bg-cerulean-500/20 text-cerulean-300 border-cerulean-500/40";
+    if (rank === 3) return "bg-slate-300/20 text-offwhite border-slate-400/40";
     return "bg-slate-800/50 text-slate-400 border-slate-800";
   };
 
@@ -63,7 +63,7 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ items, onSel
             placeholder="Search candidates by name, email, or ID..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-9 pr-4 py-2 text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-indigo-500"
+            className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-9 pr-4 py-2 text-offwhite placeholder:text-slate-500 focus:outline-none focus:border-coral-500"
           />
         </div>
 
@@ -72,7 +72,7 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ items, onSel
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-slate-300 focus:outline-none focus:border-indigo-500"
+            className="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-slate-300 focus:outline-none focus:border-coral-500"
           >
             <option value="all">All Recommendations</option>
             <option value="strong_hire">Strong Hire</option>
@@ -84,7 +84,7 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ items, onSel
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as any)}
-            className="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-slate-300 focus:outline-none focus:border-indigo-500"
+            className="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-slate-300 focus:outline-none focus:border-coral-500"
           >
             <option value="score">Sort by Overall Score</option>
             <option value="coverage">Sort by Skill Coverage %</option>
@@ -132,7 +132,7 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ items, onSel
 
                   {/* Candidate Name & Email */}
                   <td className="py-3.5 px-4">
-                    <div className="font-semibold text-slate-100 group-hover:text-indigo-400 transition">
+                    <div className="font-semibold text-offwhite group-hover:text-coral-400 transition">
                       {item.candidate_name}
                     </div>
                     <div className="text-[11px] text-slate-400">{item.email || item.candidate_id}</div>
@@ -141,7 +141,7 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ items, onSel
                   {/* Overall Fit Score */}
                   <td className="py-3.5 px-4">
                     <div className="flex items-center space-x-2">
-                      <span className="font-bold text-slate-100 text-sm">{item.overall_fit_score}%</span>
+                      <span className="font-bold text-offwhite text-sm">{item.overall_fit_score}%</span>
                       <span
                         className={`text-[10px] uppercase font-semibold px-2 py-0.5 rounded-full border ${getBadgeStyle(
                           item.recommendation
@@ -161,7 +161,7 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ items, onSel
                       </div>
                       <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
                         <div
-                          className="bg-indigo-500 h-full rounded-full"
+                          className="bg-coral-500 h-full rounded-full"
                           style={{ width: `${Math.min(100, item.skill_coverage_pct)}%` }}
                         />
                       </div>
@@ -174,7 +174,7 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ items, onSel
                       <span className="text-[11px] capitalize text-slate-300 font-medium">
                         {item.speaking_pace || "optimal"} pace
                       </span>
-                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700">
+                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-slate-800 text-cerulean-300 border border-slate-700">
                         {item.sentiment_label || "POSITIVE"}
                       </span>
                     </div>
@@ -186,21 +186,21 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ items, onSel
                       <span
                         className={`font-semibold ${
                           item.credibility_score >= 85
-                            ? "text-emerald-400"
+                            ? "text-cerulean-400"
                             : item.credibility_score >= 70
-                            ? "text-indigo-400"
+                            ? "text-coral-400"
                             : "text-amber-400"
                         }`}
                       >
                         {item.credibility_score}%
                       </span>
                       {item.discrepancies_count > 0 ? (
-                        <span className="flex items-center text-[10px] text-rose-400 font-medium bg-rose-950/60 px-1.5 py-0.5 rounded border border-rose-800/80">
+                        <span className="flex items-center text-[10px] text-coral-400 font-medium bg-coral-950/60 px-1.5 py-0.5 rounded border border-coral-800/80">
                           <AlertTriangle className="w-3 h-3 mr-1" />
                           {item.discrepancies_count} alert
                         </span>
                       ) : (
-                        <CheckCircle className="w-3.5 h-3.5 text-emerald-400" />
+                        <CheckCircle className="w-3.5 h-3.5 text-cerulean-400" />
                       )}
                     </div>
                   </td>
@@ -212,7 +212,7 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ items, onSel
                         e.stopPropagation();
                         onSelectCandidate(item.candidate_id);
                       }}
-                      className="text-xs font-semibold text-indigo-400 hover:text-indigo-300 bg-indigo-950/40 hover:bg-indigo-950/80 px-3 py-1.5 rounded-lg border border-indigo-800/50 transition"
+                      className="text-xs font-semibold text-cerulean-400 hover:text-cerulean-300 bg-cerulean-950/40 hover:bg-cerulean-950/80 px-3 py-1.5 rounded-lg border border-cerulean-800/50 transition"
                     >
                       Inspect
                     </button>
