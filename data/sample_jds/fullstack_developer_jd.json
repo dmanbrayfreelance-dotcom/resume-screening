@@ -1,0 +1,40 @@
+{
+  "job_id": "jd-fs-002",
+  "title": "Full-Stack AI Platform Engineer",
+  "department": "Platform Engineering",
+  "location": "New York, NY / Hybrid",
+  "employment_type": "Full-time",
+  "experience_years_min": 2.5,
+  "experience_years_max": 6.0,
+  "education_level": "Bachelor's in Computer Science or equivalent practical experience",
+  "description": "Join our platform team to build modern recruiter dashboards, streaming interview review studio, and resilient asynchronous backend services for high-throughput multimodal intelligence screening.",
+  "responsibilities": [
+    "Build responsive recruiter analytics dashboards in React, Tailwind CSS, and TypeScript",
+    "Develop asynchronous REST APIs in FastAPI with MongoDB Atlas integration",
+    "Implement real-time video audio playback with synchronized transcript annotations",
+    "Conduct end-to-end testing, CI/CD pipeline automation, and offline resilient data caching"
+  ],
+  "required_skills": [
+    "React",
+    "TypeScript",
+    "Python",
+    "FastAPI",
+    "MongoDB",
+    "Tailwind CSS",
+    "REST APIs"
+  ],
+  "preferred_skills": [
+    "Docker",
+    "Vite",
+    "PyTest",
+    "WebSockets",
+    "Cloud Architecture"
+  ],
+  "scoring_weights": {
+    "skill_match": 0.35,
+    "experience_match": 0.30,
+    "multimodal_presentation": 0.20,
+    "sentiment_engagement": 0.15
+  },
+  "status": "open"
+}

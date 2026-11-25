@@ -1,0 +1,33 @@
+SARAH CHEN
+San Francisco, CA | (415) 555-0192 | sarah.chen@example.com
+LinkedIn: linkedin.com/in/sarah-chen-ai | GitHub: github.com/sarahchen-ai
+
+PROFESSIONAL SUMMARY
+Senior Multimodal AI Engineer with 5+ years of experience architecting production NLP and computer vision systems. Proven track record deploying Whisper speech-to-text models, Hugging Face transformers, and FastAPI microservices handling 2M+ daily requests. Passionate about ethical AI, candidate ranking algorithms, and scalable vector retrieval.
+
+CORE SKILLS
+- Languages & Frameworks: Python, PyTorch, FastAPI, Transformers, Whisper, LangChain, Scikit-Learn
+- Data & Storage: MongoDB, MongoDB Atlas, Redis, Pinecone, PostgreSQL
+- ML/AI: NLP, Vector Embeddings, Speech-to-Text (ASR), Sentiment Analysis, Model Distillation
+- DevOps & Tools: Docker, Kubernetes, Git, CI/CD, ONNX Runtime, FFmpeg
+
+WORK EXPERIENCE
+Senior AI Engineer | NeuralScale Inc. | San Francisco, CA
+June 2022 - Present
+- Architected and deployed an end-to-end multimodal interview screening engine using Whisper ASR and DistilBERT sentiment scoring, reducing recruiter screening time by 62%.
+- Built vector search pipelines utilizing sentence-transformers and MongoDB Atlas Vector Search, improving semantic matching accuracy over raw keyword matching by 38%.
+- Designed asynchronous FastAPI microservices with offline JSON fallback resilience, achieving 99.98% uptime.
+
+Machine Learning Engineer | Apex Cognitive Systems | Seattle, WA
+August 2019 - May 2022
+- Developed NLP entity extraction pipelines for unstructured resume documents, parsing 150,000+ candidate CVs with 94% precision.
+- Implemented real-time audio analysis modules detecting speaking rate (WPM), speech pauses, and clarity metrics.
+- Optimized transformer model latency using PyTorch quantization and ONNX runtime, reducing inference latency by 45%.
+
+EDUCATION
+- Master of Science in Computer Science (Machine Learning Specialization) | University of Washington, 2019
+- Bachelor of Science in Data Science | UC Berkeley, 2017
+
+CERTIFICATIONS & PROJECTS
+- Deep Learning Specialization (DeepLearning.AI)
+- Open-Source Contributor to HuggingFace Transformers

@@ -1,0 +1,97 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Environment variables & secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# Node & Frontend dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Editor & OS files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# Testing and coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Large temporary media, recordings, and audio dumps (keep placeholder fixtures)
+*.mp4
+*.mkv
+*.mov
+*.avi
+*.wmv
+*.mp3
+*.wav
+*.flac
+*.m4a
+!data/sample_videos/*.json
+!data/sample_videos/*.py
+!data/sample_videos/*.md
+!data/sample_videos/*.txt
+
+# Machine Learning models & weights cache
+models_cache/
+.cache/
+*.onnx
+*.bin
+*.pt
+*.pth
+*.safetensors
+
+# Local Fallback Data Store (runtime JSON cache)
+backend/data/fallback_store/
+data/fallback_store/

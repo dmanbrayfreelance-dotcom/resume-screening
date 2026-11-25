@@ -1,0 +1,32 @@
+ALEX RIVERA
+New York, NY | (212) 555-0147 | alex.rivera@example.com
+LinkedIn: linkedin.com/in/alexrivera-dev | Portfolio: alexrivera.dev
+
+PROFESSIONAL SUMMARY
+Dynamic Full-Stack Software Engineer with 4 years of experience building modern web applications, scalable backend microservices, and AI-assisted interfaces. Proficient in React, TypeScript, Python, FastAPI, and MongoDB Atlas. Passionate about crafting intuitive recruiter experiences and high-throughput data processing workflows.
+
+CORE SKILLS
+- Frontend: React, TypeScript, Next.js, Tailwind CSS, Vite, HTML5/CSS3, Chart.js
+- Backend: Python, FastAPI, Node.js, Express, RESTful APIs, WebSockets
+- Databases: MongoDB, MongoDB Atlas, PostgreSQL, Redis
+- Tools & Practices: Git, Docker, PyTest, Jest, CI/CD, Postman, Agile/Scrum
+
+WORK EXPERIENCE
+Full-Stack Developer | TalentSphere Technologies | New York, NY
+January 2022 - Present
+- Engineered high-performance recruiter portal in React and TypeScript, incorporating interactive candidate match cards and live video review components.
+- Developed RESTful API endpoints using FastAPI and MongoDB Atlas with async motor drivers and SSL validation.
+- Implemented real-time status updates and document processing queues with sub-200ms roundtrip response times.
+
+Junior Web Engineer | Hudson Digital Labs | Jersey City, NJ
+July 2020 - December 2021
+- Created responsive user interface workflows using modern JavaScript, React, and CSS frameworks.
+- Integrated third-party analytics and reporting tools, generating executive candidate pipeline summaries.
+- Collaborated with QA team to establish automated unit and integration tests with 85%+ code coverage.
+
+EDUCATION
+- Bachelor of Science in Information Technology | Rutgers University, 2020
+
+PROJECTS
+- ScreeningStudio UI: Built an open-source evaluation dashboard visualizing candidate scoring across multiple interview stages.
+- ResumeMetrics: Python CLI tool for comparing tech job requirements against resume keywords.

@@ -1,0 +1,49 @@
+{
+  "description": "Multimodal video interview fixtures and pre-computed inference metadata for offline testing and verification.",
+  "fixtures": [
+    {
+      "candidate_id": "cand-001",
+      "candidate_name": "Sarah Chen",
+      "video_filename": "sarah_chen_interview_sample.mp4",
+      "video_duration_seconds": 45.0,
+      "audio_extracted_path": "sarah_chen_interview_sample.wav",
+      "transcript": "Hello, thank you for having me. Over the past five years, I have focused on productionizing multimodal systems combining speech-to-text with Whisper and embedding-based retrieval. In my recent role, I scaled our inference services to handle millions of queries daily while prioritizing fairness and low latency. I'm excited about this opportunity to drive your multimodal intelligence platform forward.",
+      "words_per_minute": 138.5,
+      "speaking_pace": "optimal",
+      "sentiment_analysis": {
+        "label": "POSITIVE",
+        "score": 0.942,
+        "positive_prob": 0.942,
+        "negative_prob": 0.058
+      },
+      "multimodal_scores": {
+        "confidence_score": 92.5,
+        "clarity_score": 94.0,
+        "engagement_score": 88.0
+      },
+      "flagged_anomalies": []
+    },
+    {
+      "candidate_id": "cand-002",
+      "candidate_name": "Alex Rivera",
+      "video_filename": "alex_rivera_interview_sample.mp4",
+      "video_duration_seconds": 38.0,
+      "audio_extracted_path": "alex_rivera_interview_sample.wav",
+      "transcript": "Hi team! I specialize in full-stack web and platform engineering with React, TypeScript, and FastAPI backends. I really enjoy bridging intuitive UI/UX with high-throughput backend APIs, especially when processing complex AI results and keeping application state snappy and clean.",
+      "words_per_minute": 142.0,
+      "speaking_pace": "optimal",
+      "sentiment_analysis": {
+        "label": "POSITIVE",
+        "score": 0.915,
+        "positive_prob": 0.915,
+        "negative_prob": 0.085
+      },
+      "multimodal_scores": {
+        "confidence_score": 89.0,
+        "clarity_score": 91.0,
+        "engagement_score": 93.5
+      },
+      "flagged_anomalies": []
+    }
+  ]
+}

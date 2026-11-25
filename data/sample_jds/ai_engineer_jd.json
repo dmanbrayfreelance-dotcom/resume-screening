@@ -1,0 +1,41 @@
+{
+  "job_id": "jd-ai-001",
+  "title": "Senior Multimodal AI Engineer",
+  "department": "Applied AI Research",
+  "location": "San Francisco, CA / Remote",
+  "employment_type": "Full-time",
+  "experience_years_min": 3.0,
+  "experience_years_max": 7.0,
+  "education_level": "Bachelor's or Master's in Computer Science, Data Science, or related field",
+  "description": "We are seeking a Senior Multimodal AI Engineer to lead the design and deployment of real-time speech, NLP, and computer vision models. You will architect scalable screening engines, speech-to-text inference pipelines using OpenAI Whisper, and semantic vector ranking microservices.",
+  "responsibilities": [
+    "Design and optimize end-to-end multimodal inference pipelines using FastAPI and PyTorch",
+    "Integrate Whisper ASR and transformer-based sentiment analysis for video interviews",
+    "Develop cosine similarity vector ranking between candidate embeddings and job requirements",
+    "Ensure low latency, algorithmic fairness, and robust error fallback systems"
+  ],
+  "required_skills": [
+    "Python",
+    "PyTorch",
+    "FastAPI",
+    "Whisper",
+    "Transformers",
+    "MongoDB",
+    "NLP",
+    "Vector Embeddings"
+  ],
+  "preferred_skills": [
+    "Docker",
+    "Kubernetes",
+    "ONNX Runtime",
+    "FFmpeg",
+    "React"
+  ],
+  "scoring_weights": {
+    "skill_match": 0.40,
+    "experience_match": 0.25,
+    "multimodal_presentation": 0.20,
+    "sentiment_engagement": 0.15
+  },
+  "status": "open"
+}
