@@ -23,6 +23,7 @@ class Settings(BaseSettings):
         "http://localhost:5173",
         "http://127.0.0.1:3000",
         "http://127.0.0.1:5173",
+        "https://frontend-seven-taupe-72.vercel.app",
     ]
 
     # Database Configuration (MongoDB Atlas & Local JSON Fallback)
@@ -44,10 +45,13 @@ class Settings(BaseSettings):
                 import json
 
                 try:
-                    return json.loads(v)
+                    origins = json.loads(v)
+                    return [o.rstrip("/") for o in origins if isinstance(o, str)]
                 except Exception:
                     pass
-            return [i.strip() for i in v.split(",") if i.strip()]
+            return [i.strip().rstrip("/") for i in v.split(",") if i.strip()]
+        if isinstance(v, list):
+            return [o.rstrip("/") if isinstance(o, str) else o for o in v]
         return v
 
     model_config = SettingsConfigDict(
