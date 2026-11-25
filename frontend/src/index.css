@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,6 +15,8 @@ body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background-color: #F7F7F7;
   color: #1e293b;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
@@ -20,18 +24,91 @@ body {
   color: #ffffff;
 }
 
-/* Custom scrollbars with brand accents */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+/* Custom scrollbars */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: #F7F7F7; }
+::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: #67A9CF; }
+
+/* Smooth transitions for all interactive elements */
+button, a, input, select, textarea { transition-property: color, background-color, border-color, box-shadow, transform, opacity; transition-duration: 150ms; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
+
+/* Card hover lift effect */
+.card-hover {
+  transition: box-shadow 200ms ease, transform 200ms ease;
 }
-::-webkit-scrollbar-track {
-  background: #F7F7F7;
+.card-hover:hover {
+  box-shadow: 0 8px 25px -5px rgba(0,0,0,0.08), 0 4px 10px -3px rgba(0,0,0,0.05);
+  transform: translateY(-1px);
 }
-::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 9999px;
+
+/* Coral glow button */
+.btn-coral {
+  background: linear-gradient(135deg, #EF8A62, #e8734a);
+  box-shadow: 0 4px 14px 0 rgba(239,138,98,0.35);
 }
-::-webkit-scrollbar-thumb:hover {
-  background: #67A9CF;
+.btn-coral:hover {
+  background: linear-gradient(135deg, #e8784d, #db6235);
+  box-shadow: 0 6px 20px 0 rgba(239,138,98,0.45);
+  transform: translateY(-1px);
+}
+.btn-coral:active { transform: translateY(0); }
+
+/* Gradient progress bars */
+.progress-coral {
+  background: linear-gradient(90deg, #EF8A62, #f6b89f);
+}
+.progress-cerulean {
+  background: linear-gradient(90deg, #67A9CF, #9ecbe3);
+}
+
+/* Shimmer skeleton loader */
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+.shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, #fafafa 50%, #f0f0f0 75%);
+  background-size: 400px 100%;
+  animation: shimmer 1.4s ease infinite;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in { animation: fadeIn 0.3s ease forwards; }
+
+/* Metric card gradient top border */
+.metric-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: 12px 12px 0 0;
+}
+.metric-card-coral::before { background: linear-gradient(90deg, #EF8A62, #f6b89f); }
+.metric-card-cerulean::before { background: linear-gradient(90deg, #67A9CF, #9ecbe3); }
+
+/* Focus ring override */
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(239, 138, 98, 0.15);
+  border-color: #EF8A62 !important;
+}
+
+/* Drawer slide-in animation */
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+.slide-in-from-right { animation: slideInRight 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+/* Table row pulse on hover */
+tr.row-hover { transition: background-color 120ms ease; }
+
+/* Dashed upload border animation */
+@keyframes dashOffset {
+  to { stroke-dashoffset: -20; }
 }

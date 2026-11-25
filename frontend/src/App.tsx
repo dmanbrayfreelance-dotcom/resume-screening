@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Navbar } from "./components/Navbar";
 import { DashboardPage } from "./pages/DashboardPage";
 import { fetchHealth, HealthStatus } from "./api/client";
 
 export default function App() {
   const [systemStatus, setSystemStatus] = useState<HealthStatus | null>(null);
+  const openCreateJobRef = useRef<(() => void) | null>(null);
+  const openIngestRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
     fetchHealth()
@@ -14,12 +16,23 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#F7F7F7] text-slate-800 flex flex-col font-sans">
-      <Navbar systemStatus={systemStatus} />
+      <Navbar
+        systemStatus={systemStatus}
+        onOpenCreateJob={() => openCreateJobRef.current?.()}
+        onOpenIngest={() => openIngestRef.current?.()}
+      />
       <main className="flex-1">
-        <DashboardPage />
+        <DashboardPage
+          registerOpenCreateJob={(fn) => {
+            openCreateJobRef.current = fn;
+          }}
+          registerOpenIngest={(fn) => {
+            openIngestRef.current = fn;
+          }}
+        />
       </main>
       <footer className="border-t border-slate-200 bg-white/80 py-4 px-6 text-center text-xs text-slate-500">
-        Multimodal Resume Intelligence & Screening Studio • Advisory Scoring Only • Algorithmic Fairness Compliant
+        Multimodal Resume Intelligence &amp; Screening Studio • Advisory Scoring Only • Algorithmic Fairness Compliant
       </footer>
     </div>
   );
