@@ -261,15 +261,17 @@ class DatabaseManager:
             return
 
         try:
-            # MongoDB Atlas configuration with certifi TLS and 5s timeout
-            client_options = {
-                "serverSelectionTimeoutMS": 5000,
-                "tlsCAFile": certifi.where(),
+            # MongoDB Atlas configuration with certifi TLS and short serverSelection timeout
+            client_options: Dict[str, Any] = {
+                "serverSelectionTimeoutMS": 1500,
+                "connectTimeoutMS": 1500,
             }
+            if "mongodb+srv://" in mongo_uri or "ssl=true" in mongo_uri.lower() or "tls=true" in mongo_uri.lower():
+                client_options["tlsCAFile"] = certifi.where()
 
             self.client = AsyncIOMotorClient(mongo_uri, **client_options)
-            # Startup ping check
-            await self.client.admin.command("ping")
+            # Startup ping check with strict timeout
+            await asyncio.wait_for(self.client.admin.command("ping"), timeout=2.0)
             self.db = self.client[settings.MONGODB_DB_NAME]
             self.is_fallback = False
             logger.info(
@@ -281,6 +283,13 @@ class DatabaseManager:
 
         except Exception as e:
             logger.warning(f"MongoDB Atlas connection ping failed ({e}).")
+            if self.client:
+                try:
+                    self.client.close()
+                except Exception:
+                    pass
+                self.client = None
+
             if settings.ENABLE_LOCAL_FALLBACK_STORE:
                 logger.info("Activating Local JSON Fallback Store for offline resilience.")
                 self._activate_fallback()

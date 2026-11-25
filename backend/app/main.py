@@ -6,6 +6,7 @@ from backend.app.api.routes import api_router
 from backend.app.api.routes.health import health_check
 from backend.app.core.config import settings
 from backend.app.core.database import db_manager
+from data.sample_jds.seed_25_jds import seed_benchmark_jobs
 
 # Configure root logger
 logging.basicConfig(
@@ -20,6 +21,11 @@ async def lifespan(app: FastAPI):
     """Application lifespan context: handles startup and shutdown logic."""
     logger.info(f"Starting {settings.PROJECT_NAME}...")
     await db_manager.connect_to_mongo()
+    try:
+        # Seed 25 benchmark job descriptions if store is fresh
+        await seed_benchmark_jobs(db_manager.db)
+    except Exception as seed_err:
+        logger.warning(f"Benchmark JDs seeding notice: {seed_err}")
     yield
     logger.info(f"Shutting down {settings.PROJECT_NAME}...")
     await db_manager.close_mongo_connection()

@@ -33,6 +33,14 @@ class ProsodyVisionResult(BaseModel):
         default="multimodal_full",
         description="multimodal_full, audio_only, or text_prosody_degraded",
     )
+    acoustic_telemetry_source: str = Field(
+        default="acoustic_heuristic_fallback",
+        description="librosa_acoustic_measured, wave_pcm_measured, or acoustic_heuristic_fallback",
+    )
+    visual_telemetry_source: str = Field(
+        default="visual_heuristic_fallback",
+        description="opencv_frame_measured or visual_heuristic_fallback",
+    )
 
 
 class ProsodyVisionService:
@@ -81,19 +89,21 @@ class ProsodyVisionService:
             pace = "optimal"
 
         # 3. Acoustic Vocal Energy & Pitch Variance Analysis
-        vocal_energy, pitch_stability = self._analyze_acoustics(audio_path)
+        vocal_energy, pitch_stability, acoustic_src = self._analyze_acoustics(audio_path)
         if vocal_energy is None:
             # Degraded audio mode
             vocal_energy = 84.0
             pitch_stability = 86.0
+            acoustic_src = "acoustic_heuristic_fallback"
             if mode == "multimodal_full":
                 mode = "video_and_text_prosody"
 
         # 4. Visual Engagement & Head-Pose Stability Analysis
-        visual_engagement, eye_contact = self._analyze_vision(video_path)
+        visual_engagement, eye_contact, visual_src = self._analyze_vision(video_path)
         if visual_engagement is None:
             visual_engagement = 85.0
             eye_contact = 86.0
+            visual_src = "visual_heuristic_fallback"
             if mode == "multimodal_full":
                 mode = "audio_only" if audio_path else "text_prosody_degraded"
             elif mode == "video_and_text_prosody":
@@ -130,6 +140,8 @@ class ProsodyVisionService:
             overall_presentation_score=max(0.0, min(100.0, overall_score)),
             flagged_anomalies=flagged,
             analysis_mode=mode,
+            acoustic_telemetry_source=acoustic_src,
+            visual_telemetry_source=visual_src,
         )
 
     def _analyze_fillers(self, text: str) -> Tuple[List[str], float]:
@@ -151,17 +163,18 @@ class ProsodyVisionService:
 
     def _analyze_acoustics(
         self, audio_path: Optional[Union[str, Path]]
-    ) -> Tuple[Optional[float], Optional[float]]:
+    ) -> Tuple[Optional[float], Optional[float], str]:
         """
         Calculates Root-Mean-Square (RMS) amplitude energy and pitch regularity
         using standard wave format inspection or librosa if installed.
+        Returns (energy_score, pitch_stability, telemetry_source).
         """
         if not audio_path:
-            return None, None
+            return None, None, "acoustic_heuristic_fallback"
 
         p = Path(audio_path)
         if not p.exists() or p.stat().st_size == 0:
-            return None, None
+            return None, None, "acoustic_heuristic_fallback"
 
         # 1. Try Librosa if installed
         try:
@@ -171,11 +184,9 @@ class ProsodyVisionService:
             if len(y) > 0:
                 rms = float(librosa.feature.rms(y=y).mean())
                 zcr = float(librosa.feature.zero_crossing_rate(y=y).mean())
-                # Normalize RMS to 0-100
                 energy_score = min(100.0, max(50.0, 50.0 + (rms * 400.0)))
-                # ZCR stability
                 stability = min(100.0, max(60.0, 100.0 - (zcr * 200.0)))
-                return energy_score, stability
+                return energy_score, stability, "librosa_acoustic_measured"
         except Exception:
             pass
 
@@ -185,34 +196,33 @@ class ProsodyVisionService:
                 with wave.open(str(p), "rb") as wf:
                     n_frames = wf.getnframes()
                     if n_frames == 0:
-                        return None, None
+                        return None, None, "acoustic_heuristic_fallback"
                     frames = wf.readframes(min(n_frames, 32000))
-                    # Unpack 16-bit PCM
                     fmt = f"<{len(frames)//2}h"
                     samples = struct.unpack(fmt, frames)
                     if samples:
                         rms_val = math.sqrt(sum(s * s for s in samples) / len(samples))
-                        # Baseline score for audio presence
                         energy_score = min(98.0, max(65.0, 65.0 + (rms_val / 32768.0) * 33.0))
-                        return energy_score, 88.0
+                        return energy_score, 88.0, "wave_pcm_measured"
             except Exception:
                 pass
 
-        return None, None
+        return None, None, "acoustic_heuristic_fallback"
 
     def _analyze_vision(
         self, video_path: Optional[Union[str, Path]]
-    ) -> Tuple[Optional[float], Optional[float]]:
+    ) -> Tuple[Optional[float], Optional[float], str]:
         """
         Analyzes video frames for face presence and eye-contact continuity via OpenCV.
         Gracefully returns None if video is absent or OpenCV is unavailable.
+        Returns (engagement, eye_contact, telemetry_source).
         """
         if not video_path:
-            return None, None
+            return None, None, "visual_heuristic_fallback"
 
         p = Path(video_path)
         if not p.exists() or p.stat().st_size < 100:
-            return None, None
+            return None, None, "visual_heuristic_fallback"
 
         # Try OpenCV
         try:
@@ -220,12 +230,12 @@ class ProsodyVisionService:
 
             cap = cv2.VideoCapture(str(p))
             if not cap.isOpened():
-                return None, None
+                return None, None, "visual_heuristic_fallback"
 
             frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
             if frame_count <= 0:
                 cap.release()
-                return None, None
+                return None, None, "visual_heuristic_fallback"
 
             # Sample 5 frames across video
             step = max(frame_count // 5, 1)
@@ -246,12 +256,12 @@ class ProsodyVisionService:
                 avg_std = sum(variances) / len(variances)
                 engagement = min(96.0, max(75.0, 75.0 + (avg_std / 2.0)))
                 eye_contact = min(95.0, max(80.0, engagement - 2.0))
-                return engagement, eye_contact
+                return engagement, eye_contact, "opencv_frame_measured"
 
         except Exception:
             pass
 
-        return None, None
+        return None, None, "visual_heuristic_fallback"
 
 
 # Global singleton prosody vision instance

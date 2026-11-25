@@ -88,7 +88,8 @@ multimodal-resume-intelligence/
 ### 2. Semantic Matching & Multimodal Telemetry
 - **Section-Weighted Dense Embeddings**: 384-dimensional dense embeddings (`all-MiniLM-L6-v2` with deterministic hash fallback) computing cosine similarities across skills, experience, and education.
 - **Skill-Gap Explainability**: Identifies matched skills, missing required skills, missing preferred skills, coverage percentage, and actionable learning recommendations.
-- **Acoustic & Vision Metrics**: Evaluates speaking pace (WPM), filler-word frequency, vocal energy variation, and visual face-tracking engagement.
+- **BERT Sentiment Analysis**: Powered by `nlptown/bert-base-multilingual-uncased-sentiment` (normalized to a 0.0–1.0 polarity scale) with an offline high-precision lexicon fallback.
+- **Acoustic & Vision Metrics**: Evaluates speaking pace (WPM), filler-word frequency, vocal energy variation, and visual face-tracking engagement with explicit telemetry source labels (`librosa_acoustic_measured`, `wave_pcm_measured`, `opencv_frame_measured`, or heuristic fallback).
 - **Cross-Modal Claim Verification**: Compares spoken claims in video transcripts against written resumes to verify credibility, detect tenure inflation, and flag unbacked executive seniority claims.
 
 ### 3. Ranking, Governance & Reporting
@@ -165,9 +166,9 @@ python -m pytest backend/tests/ -v
 
 ---
 
-## Sample Data & Test Fixtures
-- **Job Descriptions**: `data/sample_jds/ai_engineer_jd.json`, `data/sample_jds/fullstack_developer_jd.json`
-- **Resumes**: `data/sample_resumes/sarah_chen_ai_engineer.txt`, `data/sample_resumes/alex_rivera_fullstack.txt`
+## Sample Data & Benchmark JDs
+- **25 Benchmark Job Descriptions**: Seeded automatically at startup across AI/ML, Software, Data Science, Cloud/DevOps, Cybersecurity, and Product/QA via `data/sample_jds/seed_25_jds.py` / `benchmark_25_jds.json`.
+- **Sample Resumes**: `data/sample_resumes/sarah_chen_ai_engineer.txt`, `data/sample_resumes/alex_rivera_fullstack.txt`
 - **Video Manifest**: `data/sample_videos/fixtures_manifest.json`
 - **Fixture Generator**:
   ```bash

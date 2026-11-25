@@ -20,7 +20,7 @@ def test_settings_configuration():
     assert settings.ENABLE_LOCAL_FALLBACK_STORE is True
     assert settings.WHISPER_MODEL_SIZE == "base"
     assert settings.EMBEDDING_MODEL_NAME == "sentence-transformers/all-MiniLM-L6-v2"
-    assert settings.SENTIMENT_MODEL_NAME == "distilbert/distilbert-base-uncased-finetuned-sst-2-english"
+    assert settings.SENTIMENT_MODEL_NAME == "nlptown/bert-base-multilingual-uncased-sentiment"
 
 
 @pytest.mark.asyncio
@@ -63,6 +63,7 @@ async def test_database_fallback_operations():
     # Cleanup
     del_res = await jobs_col.delete_one({"job_id": test_job_id})
     assert del_res.deleted_count == 1
+    await db_manager.close_mongo_connection()
 
 
 def test_job_profile_schema_validation():

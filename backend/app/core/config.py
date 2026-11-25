@@ -36,7 +36,7 @@ class Settings(BaseSettings):
     # Multimodal & NLP Model Configuration
     WHISPER_MODEL_SIZE: str = "base"
     EMBEDDING_MODEL_NAME: str = "sentence-transformers/all-MiniLM-L6-v2"
-    SENTIMENT_MODEL_NAME: str = "distilbert/distilbert-base-uncased-finetuned-sst-2-english"
+    SENTIMENT_MODEL_NAME: str = "nlptown/bert-base-multilingual-uncased-sentiment"
 
     @field_validator("CORS_ORIGINS", mode="before")
     @classmethod
