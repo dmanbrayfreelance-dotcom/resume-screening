@@ -161,10 +161,10 @@ export function DashboardPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       {/* Top Bar: Active Job Selector & Export Actions */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-sm flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+      <div className="bg-white border border-slate-200/90 rounded-2xl p-6 shadow-sm flex flex-col lg:flex-row lg:items-center justify-between gap-6">
         <div className="space-y-1 flex-1">
-          <div className="flex items-center space-x-2 text-xs font-medium text-slate-400">
-            <Briefcase className="w-4 h-4 text-coral-400" />
+          <div className="flex items-center space-x-2 text-xs font-medium text-slate-500">
+            <Briefcase className="w-4 h-4 text-coral-500" />
             <span>Active Screening Rubric & Job Profile</span>
           </div>
           <div className="flex flex-wrap items-center gap-3 pt-1">
@@ -174,7 +174,7 @@ export function DashboardPage() {
                 const found = jobs.find((j) => j.job_id === e.target.value);
                 if (found) setCurrentJob(found);
               }}
-              className="bg-slate-950 border border-slate-800 text-offwhite font-semibold text-base sm:text-lg rounded-xl px-4 py-2.5 focus:outline-none focus:border-coral-500 max-w-md"
+              className="bg-slate-50 border border-slate-200 text-slate-900 font-semibold text-base sm:text-lg rounded-xl px-4 py-2.5 focus:outline-none focus:border-coral-500 max-w-md shadow-xs"
             >
               {jobs.map((job) => (
                 <option key={job.job_id} value={job.job_id}>
@@ -186,14 +186,14 @@ export function DashboardPage() {
 
             <button
               onClick={() => setActiveTab("rubric")}
-              className="text-xs bg-slate-800 hover:bg-slate-700 text-offwhite px-3 py-2 rounded-xl border border-slate-700 flex items-center space-x-1.5 transition"
+              className="text-xs bg-slate-100 hover:bg-slate-200 text-slate-800 px-3 py-2 rounded-xl border border-slate-200 flex items-center space-x-1.5 transition font-medium"
             >
-              <PlusCircle className="w-3.5 h-3.5 text-coral-400" />
+              <PlusCircle className="w-3.5 h-3.5 text-coral-500" />
               <span>Create / Edit Rubric</span>
             </button>
           </div>
           {currentJob && (
-            <p className="text-xs text-slate-400 pt-1 line-clamp-1">
+            <p className="text-xs text-slate-500 pt-1 line-clamp-1">
               Req Skills: {currentJob.required_skills?.join(", ") || "None specified"} • Min Exp: {currentJob.experience_years_min || 0}+ yrs
             </p>
           )}
@@ -204,28 +204,28 @@ export function DashboardPage() {
           <button
             onClick={() => handleExport("csv")}
             disabled={exporting !== null || !currentJob}
-            className="text-xs font-medium px-3.5 py-2 rounded-xl bg-slate-950 hover:bg-slate-800 text-slate-300 hover:text-offwhite border border-slate-800 flex items-center space-x-2 transition disabled:opacity-50"
+            className="text-xs font-medium px-3.5 py-2 rounded-xl bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 shadow-xs flex items-center space-x-2 transition disabled:opacity-50"
             title="Download ranked shortlist as CSV"
           >
-            <FileSpreadsheet className="w-4 h-4 text-coral-400" />
+            <FileSpreadsheet className="w-4 h-4 text-coral-500" />
             <span>{exporting === "csv" ? "Exporting..." : "Export CSV"}</span>
           </button>
           <button
             onClick={() => handleExport("json")}
             disabled={exporting !== null || !currentJob}
-            className="text-xs font-medium px-3.5 py-2 rounded-xl bg-slate-950 hover:bg-slate-800 text-slate-300 hover:text-offwhite border border-slate-800 flex items-center space-x-2 transition disabled:opacity-50"
+            className="text-xs font-medium px-3.5 py-2 rounded-xl bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 shadow-xs flex items-center space-x-2 transition disabled:opacity-50"
             title="Download full evaluation & fairness report as JSON"
           >
-            <FileCode className="w-4 h-4 text-cerulean-400" />
+            <FileCode className="w-4 h-4 text-cerulean-600" />
             <span>{exporting === "json" ? "Exporting..." : "Export JSON"}</span>
           </button>
           <button
             onClick={() => currentJob && loadJobData(currentJob.job_id)}
             disabled={refreshing || !currentJob}
-            className="p-2 rounded-xl bg-slate-950 hover:bg-slate-800 text-slate-400 hover:text-offwhite border border-slate-800 transition"
+            className="p-2 rounded-xl bg-white hover:bg-slate-50 text-slate-600 hover:text-slate-900 border border-slate-200 shadow-xs transition"
             title="Refresh candidate data"
           >
-            <RefreshCw className={`w-4 h-4 ${refreshing ? "animate-spin text-coral-400" : ""}`} />
+            <RefreshCw className={`w-4 h-4 ${refreshing ? "animate-spin text-coral-500" : ""}`} />
           </button>
         </div>
       </div>
@@ -233,66 +233,66 @@ export function DashboardPage() {
       {/* Metrics Banner */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Candidates Evaluated */}
-        <div className="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-2">
-          <div className="flex items-center justify-between text-xs text-slate-400">
+        <div className="bg-white border border-slate-200/90 p-5 rounded-2xl shadow-xs space-y-2">
+          <div className="flex items-center justify-between text-xs text-slate-500 font-medium">
             <span>Candidates Ranked</span>
-            <Users className="w-4 h-4 text-cerulean-400" />
+            <Users className="w-4 h-4 text-cerulean-600" />
           </div>
-          <div className="text-3xl font-extrabold text-offwhite">{leaderboard.length}</div>
-          <div className="text-[11px] text-slate-500">For active position</div>
+          <div className="text-3xl font-extrabold text-slate-900">{leaderboard.length}</div>
+          <div className="text-[11px] text-slate-400">For active position</div>
         </div>
 
         {/* Storage Architecture */}
-        <div className="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-2">
-          <div className="flex items-center justify-between text-xs text-slate-400">
+        <div className="bg-white border border-slate-200/90 p-5 rounded-2xl shadow-xs space-y-2">
+          <div className="flex items-center justify-between text-xs text-slate-500 font-medium">
             <span>Database Storage</span>
-            <Layers className="w-4 h-4 text-coral-400" />
+            <Layers className="w-4 h-4 text-coral-500" />
           </div>
           <div className="text-sm font-semibold flex items-center space-x-2 mt-1">
-            <span className={`w-2.5 h-2.5 rounded-full ${isFallback ? "bg-coral-400 animate-pulse" : "bg-cerulean-400"}`} />
-            <span className={isFallback ? "text-coral-300" : "text-cerulean-300"}>
+            <span className={`w-2.5 h-2.5 rounded-full ${isFallback ? "bg-coral-400 animate-pulse" : "bg-cerulean-500"}`} />
+            <span className={isFallback ? "text-coral-600 font-medium" : "text-cerulean-700 font-medium"}>
               {isFallback ? "Local JSON Fallback" : "MongoDB Atlas"}
             </span>
           </div>
-          <div className="text-[11px] text-slate-500">
+          <div className="text-[11px] text-slate-400">
             {isFallback ? "Zero-dependency offline mode" : "Production TLS cloud cluster"}
           </div>
         </div>
 
         {/* Whisper ASR Engine */}
-        <div className="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-2">
-          <div className="flex items-center justify-between text-xs text-slate-400">
+        <div className="bg-white border border-slate-200/90 p-5 rounded-2xl shadow-xs space-y-2">
+          <div className="flex items-center justify-between text-xs text-slate-500 font-medium">
             <span>Whisper ASR Speech</span>
-            <Cpu className="w-4 h-4 text-cerulean-400" />
+            <Cpu className="w-4 h-4 text-cerulean-600" />
           </div>
-          <div className="text-base font-bold text-cerulean-300 mt-1">
+          <div className="text-base font-bold text-cerulean-700 mt-1">
             {health?.active_models?.whisper_asr || "base / faster-whisper"}
           </div>
-          <div className="text-[11px] text-slate-500">Multimodal interview parsing</div>
+          <div className="text-[11px] text-slate-400">Multimodal interview parsing</div>
         </div>
 
         {/* Governance Guardrail */}
-        <div className="bg-slate-900 border border-slate-800 p-5 rounded-2xl space-y-2">
-          <div className="flex items-center justify-between text-xs text-slate-400">
+        <div className="bg-white border border-slate-200/90 p-5 rounded-2xl shadow-xs space-y-2">
+          <div className="flex items-center justify-between text-xs text-slate-500 font-medium">
             <span>Fairness Governance</span>
-            <ShieldCheck className="w-4 h-4 text-coral-400" />
+            <ShieldCheck className="w-4 h-4 text-coral-500" />
           </div>
-          <div className="text-sm font-bold text-coral-400 flex items-center space-x-1.5 mt-1">
-            <CheckCircle className="w-4 h-4 text-coral-400" />
+          <div className="text-sm font-bold text-coral-600 flex items-center space-x-1.5 mt-1">
+            <CheckCircle className="w-4 h-4 text-coral-500" />
             <span>Advisory-Only Mode</span>
           </div>
-          <div className="text-[11px] text-slate-500">Non-adverse action compliant</div>
+          <div className="text-[11px] text-slate-400">Non-adverse action compliant</div>
         </div>
       </div>
 
       {/* Tab Navigation */}
-      <div className="border-b border-slate-800 flex items-center space-x-2 sm:space-x-4 text-xs font-medium">
+      <div className="border-b border-slate-200 flex items-center space-x-2 sm:space-x-4 text-xs font-medium">
         <button
           onClick={() => setActiveTab("leaderboard")}
           className={`flex items-center space-x-2 pb-3 px-3 border-b-2 transition ${
             activeTab === "leaderboard"
-              ? "border-coral-500 text-coral-400 font-semibold"
-              : "border-transparent text-slate-400 hover:text-offwhite"
+              ? "border-coral-500 text-coral-600 font-semibold"
+              : "border-transparent text-slate-500 hover:text-slate-800"
           }`}
         >
           <BarChart3 className="w-4 h-4" />
@@ -303,8 +303,8 @@ export function DashboardPage() {
           onClick={() => setActiveTab("ingest")}
           className={`flex items-center space-x-2 pb-3 px-3 border-b-2 transition ${
             activeTab === "ingest"
-              ? "border-coral-500 text-coral-400 font-semibold"
-              : "border-transparent text-slate-400 hover:text-offwhite"
+              ? "border-coral-500 text-coral-600 font-semibold"
+              : "border-transparent text-slate-500 hover:text-slate-800"
           }`}
         >
           <PlusCircle className="w-4 h-4" />
@@ -315,8 +315,8 @@ export function DashboardPage() {
           onClick={() => setActiveTab("rubric")}
           className={`flex items-center space-x-2 pb-3 px-3 border-b-2 transition ${
             activeTab === "rubric"
-              ? "border-coral-500 text-coral-400 font-semibold"
-              : "border-transparent text-slate-400 hover:text-offwhite"
+              ? "border-coral-500 text-coral-600 font-semibold"
+              : "border-transparent text-slate-500 hover:text-slate-800"
           }`}
         >
           <Sliders className="w-4 h-4" />
@@ -327,8 +327,8 @@ export function DashboardPage() {
           onClick={() => setActiveTab("fairness")}
           className={`flex items-center space-x-2 pb-3 px-3 border-b-2 transition ${
             activeTab === "fairness"
-              ? "border-coral-500 text-coral-400 font-semibold"
-              : "border-transparent text-slate-400 hover:text-offwhite"
+              ? "border-coral-500 text-coral-600 font-semibold"
+              : "border-transparent text-slate-500 hover:text-slate-800"
           }`}
         >
           <ShieldCheck className="w-4 h-4" />
@@ -342,8 +342,8 @@ export function DashboardPage() {
           <div className="space-y-4">
             <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2">
               <div>
-                <h2 className="text-lg font-bold text-offwhite">Ranked Candidate Leaderboard</h2>
-                <p className="text-xs text-slate-400">
+                <h2 className="text-lg font-bold text-slate-900">Ranked Candidate Leaderboard</h2>
+                <p className="text-xs text-slate-500">
                   Section-weighted matching across Skills, Experience, Speech/Video Sentiment & Claim Consistency
                 </p>
               </div>

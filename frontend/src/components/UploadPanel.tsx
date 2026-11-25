@@ -77,30 +77,30 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({ currentJob, onEvaluati
   };
 
   return (
-    <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-6 shadow-sm">
+    <div className="bg-white border border-slate-200/90 p-6 rounded-2xl space-y-6 shadow-xs">
       <div>
-        <h3 className="font-semibold text-offwhite text-base">Multimodal Candidate Ingestion</h3>
-        <p className="text-xs text-slate-400 mt-1">
+        <h3 className="font-semibold text-slate-900 text-base">Multimodal Candidate Ingestion</h3>
+        <p className="text-xs text-slate-500 mt-1">
           Upload candidate resume CV and optional video interview recording for automated end-to-end evaluation against{" "}
-          <span className="text-coral-400 font-medium">{currentJob?.title || "selected role"}</span>.
+          <span className="text-coral-600 font-medium">{currentJob?.title || "selected role"}</span>.
         </p>
       </div>
 
       {errorMsg && (
-        <div className="flex items-center space-x-2 bg-coral-950/60 border border-coral-800/80 text-coral-300 text-xs px-4 py-3 rounded-xl">
-          <AlertCircle className="w-4 h-4 shrink-0" />
+        <div className="flex items-center space-x-2 bg-coral-50 border border-coral-200 text-coral-800 text-xs px-4 py-3 rounded-xl font-medium">
+          <AlertCircle className="w-4 h-4 shrink-0 text-coral-500" />
           <span>{errorMsg}</span>
         </div>
       )}
 
       {successData && (
-        <div className="bg-cerulean-950/60 border border-cerulean-800/80 text-cerulean-300 text-xs p-4 rounded-xl space-y-2">
-          <div className="flex items-center space-x-2 font-semibold">
-            <CheckCircle2 className="w-4 h-4" />
+        <div className="bg-cerulean-50 border border-cerulean-200 text-cerulean-800 text-xs p-4 rounded-xl space-y-2">
+          <div className="flex items-center space-x-2 font-semibold text-cerulean-900">
+            <CheckCircle2 className="w-4 h-4 text-cerulean-600" />
             <span>Evaluation Completed for {successData.candidate_name}!</span>
           </div>
-          <p className="text-cerulean-300/90">
-            Overall Fit Score: <strong className="text-offwhite">{successData.overall_fit_score}%</strong> (
+          <p className="text-slate-600">
+            Overall Fit Score: <strong className="text-slate-900">{successData.overall_fit_score}%</strong> (
             {successData.recommendation}). Candidate has been added to the active leaderboard.
           </p>
         </div>
@@ -114,8 +114,8 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({ currentJob, onEvaluati
             onClick={() => resumeInputRef.current?.click()}
             className={`border-2 border-dashed rounded-xl p-5 text-center cursor-pointer transition ${
               resumeFile
-                ? "border-coral-500 bg-coral-950/20"
-                : "border-slate-800 hover:border-slate-700 bg-slate-950/50"
+                ? "border-coral-500 bg-coral-50/50"
+                : "border-slate-300 hover:border-coral-400 bg-slate-50/50"
             }`}
           >
             <input
@@ -127,11 +127,11 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({ currentJob, onEvaluati
                 if (e.target.files?.[0]) setResumeFile(e.target.files[0]);
               }}
             />
-            <FileText className="w-8 h-8 mx-auto text-coral-400 mb-2" />
-            <div className="text-xs font-semibold text-slate-200">
+            <FileText className="w-8 h-8 mx-auto text-coral-500 mb-2" />
+            <div className="text-xs font-semibold text-slate-800">
               {resumeFile ? resumeFile.name : "Upload Resume (Required)"}
             </div>
-            <p className="text-[11px] text-slate-400 mt-1">
+            <p className="text-[11px] text-slate-500 mt-1">
               Supports PDF, DOCX, TXT. Automatically extracts skills, experience & scrubbed PII.
             </p>
           </div>
@@ -141,8 +141,8 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({ currentJob, onEvaluati
             onClick={() => videoInputRef.current?.click()}
             className={`border-2 border-dashed rounded-xl p-5 text-center cursor-pointer transition ${
               videoFile
-                ? "border-cerulean-500 bg-cerulean-950/20"
-                : "border-slate-800 hover:border-slate-700 bg-slate-950/50"
+                ? "border-cerulean-500 bg-cerulean-50/50"
+                : "border-slate-300 hover:border-cerulean-400 bg-slate-50/50"
             }`}
           >
             <input
@@ -154,11 +154,11 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({ currentJob, onEvaluati
                 if (e.target.files?.[0]) setVideoFile(e.target.files[0]);
               }}
             />
-            <Video className="w-8 h-8 mx-auto text-cerulean-400 mb-2" />
-            <div className="text-xs font-semibold text-slate-200">
+            <Video className="w-8 h-8 mx-auto text-cerulean-500 mb-2" />
+            <div className="text-xs font-semibold text-slate-800">
               {videoFile ? videoFile.name : "Upload Video Interview (Optional)"}
             </div>
-            <p className="text-[11px] text-slate-400 mt-1">
+            <p className="text-[11px] text-slate-500 mt-1">
               Supports MP4, WEBM. Analyzes Whisper transcription, speaking pace, tone & claim alignment.
             </p>
           </div>
@@ -167,58 +167,58 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({ currentJob, onEvaluati
         {/* Optional Metadata */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
           <div>
-            <label className="block text-slate-400 mb-1">Candidate Name</label>
+            <label className="block text-slate-600 mb-1 font-medium">Candidate Name</label>
             <input
               type="text"
               placeholder="e.g. Sarah Chen"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-offwhite focus:outline-none focus:border-coral-500"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-900 focus:outline-none focus:border-coral-500 focus:bg-white"
             />
           </div>
           <div>
-            <label className="block text-slate-400 mb-1">Email</label>
+            <label className="block text-slate-600 mb-1 font-medium">Email</label>
             <input
               type="email"
               placeholder="sarah@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-offwhite focus:outline-none focus:border-coral-500"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-900 focus:outline-none focus:border-coral-500 focus:bg-white"
             />
           </div>
           <div>
-            <label className="block text-slate-400 mb-1">Phone</label>
+            <label className="block text-slate-600 mb-1 font-medium">Phone</label>
             <input
               type="text"
               placeholder="+1-555-0192"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-offwhite focus:outline-none focus:border-coral-500"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-900 focus:outline-none focus:border-coral-500 focus:bg-white"
             />
           </div>
           <div>
-            <label className="block text-slate-400 mb-1">Location</label>
+            <label className="block text-slate-600 mb-1 font-medium">Location</label>
             <input
               type="text"
               placeholder="San Francisco, CA"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-offwhite focus:outline-none focus:border-coral-500"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-900 focus:outline-none focus:border-coral-500 focus:bg-white"
             />
           </div>
         </div>
 
         {/* Upload Progress Bar */}
         {uploading && (
-          <div className="bg-slate-950 border border-slate-800 p-4 rounded-xl space-y-2">
-            <div className="flex items-center justify-between text-xs text-coral-300">
-              <span className="flex items-center space-x-2">
-                <Loader2 className="w-4 h-4 animate-spin text-coral-400" />
+          <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl space-y-2">
+            <div className="flex items-center justify-between text-xs text-coral-700">
+              <span className="flex items-center space-x-2 font-medium">
+                <Loader2 className="w-4 h-4 animate-spin text-coral-500" />
                 <span>Processing Multimodal Pipeline...</span>
               </span>
-              <span className="text-[11px] text-slate-400">{progressStage}</span>
+              <span className="text-[11px] text-slate-500">{progressStage}</span>
             </div>
-            <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+            <div className="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
               <div className="bg-gradient-to-r from-coral-500 via-coral-400 to-cerulean-500 h-full w-3/4 animate-pulse rounded-full" />
             </div>
           </div>
@@ -228,7 +228,7 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({ currentJob, onEvaluati
           <button
             type="submit"
             disabled={uploading || !resumeFile}
-            className="flex items-center space-x-2 bg-coral-500 hover:bg-coral-600 disabled:opacity-50 text-white font-semibold text-xs px-6 py-3 rounded-xl shadow-lg shadow-coral-500/25 transition"
+            className="flex items-center space-x-2 bg-coral-500 hover:bg-coral-600 disabled:opacity-50 text-white font-semibold text-xs px-6 py-3 rounded-xl shadow-md shadow-coral-500/25 transition"
           >
             <UploadCloud className="w-4 h-4" />
             <span>{uploading ? "Evaluating..." : "Run Screening Evaluation"}</span>

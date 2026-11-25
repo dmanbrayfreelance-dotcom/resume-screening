@@ -13,12 +13,12 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
+    <div className="min-h-screen bg-[#F7F7F7] text-slate-800 flex flex-col font-sans">
       <Navbar systemStatus={systemStatus} />
       <main className="flex-1">
         <DashboardPage />
       </main>
-      <footer className="border-t border-slate-900 bg-slate-950/80 py-4 px-6 text-center text-xs text-slate-500">
+      <footer className="border-t border-slate-200 bg-white/80 py-4 px-6 text-center text-xs text-slate-500">
         Multimodal Resume Intelligence & Screening Studio • Advisory Scoring Only • Algorithmic Fairness Compliant
       </footer>
     </div>
